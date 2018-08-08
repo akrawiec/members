@@ -34,7 +34,7 @@ function members_register_default_addons() {
 		$url = 'https://themehybrid.com/api/th/v1/plugins?addons=members';
 
 		// Get data from the remote URL.
-		$response = wp_remote_get( $url );
+		$response = vip_safe_wp_remote_get( $url );
 
 		// Bail if we get no response.
 		if ( is_wp_error( $response ) )
