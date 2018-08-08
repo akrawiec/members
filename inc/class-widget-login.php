@@ -120,7 +120,7 @@ class Widget_Login extends \WP_Widget {
 
 		// If a title was input by the user, display it.
 		if ( $instance['title'] )
-			echo $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'];
+			echo esc_html( $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'] );
 
 		// If the current user is logged in.
 		if ( is_user_logged_in() ) {
