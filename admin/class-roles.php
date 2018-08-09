@@ -84,10 +84,10 @@ final class Roles {
 	public function load() {
 
 		// Get the current action if sent as request.
-		$action = isset( $_REQUEST['action'] ) ? sanitize_key( $_REQUEST['action'] ) : false;
+		$action = isset( $_POST['action'] ) ? sanitize_key( $_POST['action'] ) : false;
 
 		// Get the current action if posted.
-		if ( ( isset( $_POST['action'] ) && 'delete' == $_POST['action'] ) || ( isset( $_POST['action2'] ) && 'delete' == $_POST['action2'] ) )
+		if ( ( isset( $_POST['action'] ) && 'delete' === $_POST['action'] ) || ( isset( $_POST['action2'] ) && 'delete' === $_POST['action2'] ) )
 			$action = 'bulk-delete';
 
 		// Bulk delete role handler.
