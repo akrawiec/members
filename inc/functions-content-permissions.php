@@ -102,7 +102,7 @@ function members_set_post_roles( $post_id, $roles ) {
 	foreach ( $roles as $role ) {
 
 		// If new role is not already one of the current roles, add it.
-		if ( ! in_array( $role, $current_roles ) )
+		if ( ! in_array( $role, $current_roles, true ) )
 			members_add_post_role( $post_id, $role );
 	}
 
@@ -110,7 +110,7 @@ function members_set_post_roles( $post_id, $roles ) {
 	foreach ( $wp_roles->role_names as $role => $name ) {
 
 		// If the WP role is one of the current roles but not a new role, remove it.
-		if ( ! in_array( $role, $roles ) && in_array( $role, $current_roles ) )
+		if ( ! in_array( $role, $roles, true ) && in_array( $role, $current_roles, true ) )
 			members_remove_post_role( $post_id, $role );
 	}
 }
@@ -227,7 +227,7 @@ function members_get_post_error_message( $post_id ) {
 		$message = members_get_setting( 'content_permissions_error' );
 
 	// Return the error message.
-	return apply_filters( 'members_post_error_message', sprintf( '<div class="members-access-error">%s</div>', $message ) );
+	return apply_filters( 'members_post_error_message', sprintf( '<div class="members-access-error">%s</div>', esc_attr( $message ) ) );
 }
 
 /**
