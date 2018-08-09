@@ -95,7 +95,7 @@ final class Manage_Roles {
 		if ( $this->page ) {
 
 			// If viewing the edit role page.
-			if ( isset( $_REQUEST['action'] ) && 'edit' === $_REQUEST['action'] && current_user_can( 'edit_roles' ) )
+			if ( isset( $_POST['action'] ) && 'edit' === $_POST['action'] && current_user_can( 'edit_roles' ) )
 				$this->page_obj = new Role_Edit();
 
 			// If viewing the role list page.
