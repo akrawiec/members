@@ -116,7 +116,7 @@ final class User_New {
 							<?php if ( members_is_role_editable( $role->name ) ) :?>
 							<li>
 								<label>
-									<input type="checkbox" name="members_user_roles[]" value="<?php echo esc_attr( $role->name ); ?>" <?php checked( in_array( $role->name, $new_user_roles ) ); ?> />
+									<input type="checkbox" name="members_user_roles[]" value="<?php echo esc_attr( $role->name ); ?>" <?php checked( in_array( $role->name, $new_user_roles, true ) ); ?> />
 									<?php echo esc_html( $role->get( 'label' ) ); ?>
 								</label>
 							</li>
@@ -165,7 +165,7 @@ final class User_New {
 			foreach ( $new_roles as $new_role ) {
 
 				// If the user doesn't already have the role, add it.
-				if ( members_is_role_editable( $new_role ) && ! in_array( $new_role, (array) $user->roles ) )
+				if ( members_is_role_editable( $new_role ) && ! in_array( $new_role, (array) $user->roles, true ) )
 					$user->add_role( $new_role );
 			}
 
@@ -173,7 +173,7 @@ final class User_New {
 			foreach ( $old_roles as $old_role ) {
 
 				// If the role is editable and not in the new roles array, remove it.
-				if ( members_is_role_editable( $old_role ) && ! in_array( $old_role, $new_roles ) )
+				if ( members_is_role_editable( $old_role ) && ! in_array( $old_role, $new_roles, true ) )
 					$user->remove_role( $old_role );
 			}
 
