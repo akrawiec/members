@@ -104,7 +104,7 @@ final class User_Edit {
 							<?php if ( members_is_role_editable( $role->name ) ) :?>
 							<li>
 								<label>
-									<input type="checkbox" name="members_user_roles[]" value="<?php echo esc_attr( $role->name ); ?>" <?php checked( in_array( $role->name, $user_roles ) ); ?> />
+									<input type="checkbox" name="members_user_roles[]" value="<?php echo esc_attr( $role->name ); ?>" <?php checked( in_array( $role->name, $user_roles, true ) ); ?> />
 									<?php echo esc_html( $role->get( 'label' ) ); ?>
 								</label>
 							</li>
@@ -139,9 +139,6 @@ final class User_Edit {
 		// Is this a role change?
 		if ( ! isset( $_POST['members_new_user_roles_nonce'] ) || ! wp_verify_nonce( $_POST['members_new_user_roles_nonce'], 'new_user_roles' ) )
 			return;
-
-		// Create a new user object.
-		//$user = new WP_User( $user_id );
 
 		// If we have an array of roles.
 		if ( ! empty( $_POST['members_user_roles'] ) ) {
