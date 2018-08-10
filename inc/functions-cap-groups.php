@@ -76,7 +76,7 @@ function members_register_default_cap_groups() {
 			$icon = 'dashicons-cart';
 
 		// Register the post type cap group.
-		members_register_cap_group( "type-{$type->name}",
+		members_register_cap_group( sanitize_text_field( "type-{$type->name}" ),
 			array(
 				'label'    => $type->labels->name,
 				'caps'     => $has_caps,
@@ -234,7 +234,7 @@ function members_get_post_type_group_caps( $post_type = 'post' ) {
 	$caps = array_values( $caps );
 
 	// If this is not a core post/page post type.
-	if ( ! in_array( $post_type, array( 'post', 'page' ) ) ) {
+	if ( ! in_array( $post_type, array( 'post', 'page', true ) ) ) {
 
 		// Get the post and page caps.
 		$post_caps = array_values( (array) get_post_type_object( 'post' )->cap );
