@@ -105,7 +105,7 @@ class Widget_Users extends \WP_Widget {
 			echo esc_html( $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'] );
 
 		// Get users.
-		$users = get_users( $args );
+		$users = wp_cache_set( get_users( $args ) );
 
 		// If users were found.
 		if ( ! empty( $users ) ) {
