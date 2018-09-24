@@ -374,8 +374,8 @@ jQuery( document ).ready( function() {
 				jQuery( 'a[href="#members-tab-custom"]' ).trigger( 'click' );
 
 				// Replace text placeholder with cap.
-				members_i18n.label_grant_cap = members_i18n.label_grant_cap.replace( /%s/g, '<code>' + new_cap + '</code>' );
-				members_i18n.label_deny_cap  = members_i18n.label_deny_cap.replace( /%s/g,  '<code>' + new_cap + '</code>' );
+				members_i18n.label_grant_cap = members_i18n.label_grant_cap.replace( /%s/g, [ '<code>', '</code>' ].join( new_cap ) );
+				members_i18n.label_deny_cap  = members_i18n.label_deny_cap.replace( /%s/g,  [ '<code>', '</code>' ].join( new_cap ) );
 
 				// Set up some data to pass to our Underscore template.
 				var data = {

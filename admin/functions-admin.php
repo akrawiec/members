@@ -84,7 +84,7 @@ function members_delete_role( $role ) {
 	$default_role = get_option( 'default_role' );
 
 	// Don't delete the default role. Site admins should change the default before attempting to delete the role.
-	if ( $role == $default_role )
+	if ( $role === $default_role )
 		return;
 
 	// Get all users with the role to be deleted.
@@ -124,5 +124,5 @@ function members_delete_role( $role ) {
 function members_get_user_meta_keys() {
 	global $wpdb;
 
-	return $wpdb->get_col( "SELECT meta_key FROM $wpdb->usermeta GROUP BY meta_key ORDER BY meta_key" );
+	return wp_cache_set( $wpdb->get_col( "SELECT meta_key FROM $wpdb->usermeta GROUP BY meta_key ORDER BY meta_key" ) );
 }

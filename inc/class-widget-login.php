@@ -120,7 +120,7 @@ class Widget_Login extends \WP_Widget {
 
 		// If a title was input by the user, display it.
 		if ( $instance['title'] )
-			echo $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'];
+			echo esc_html( $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'] );
 
 		// If the current user is logged in.
 		if ( is_user_logged_in() ) {
@@ -206,48 +206,48 @@ class Widget_Login extends \WP_Widget {
 		<div style="float: left; width: 31%; margin-right: 3.5%;">
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'label_username' ); ?>"><?php esc_html_e( 'Username Label:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'label_username' ); ?>" name="<?php echo $this->get_field_name( 'label_username' ); ?>" value="<?php echo esc_attr( $instance['label_username'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'label_username' ) ); ?>"><?php esc_html_e( 'Username Label:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'label_username' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'label_username' ) ); ?>" value="<?php echo esc_attr( $instance['label_username'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'label_password' ); ?>"><?php esc_html_e( 'Password Label:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'label_password' ); ?>" name="<?php echo $this->get_field_name( 'label_password' ); ?>" value="<?php echo esc_attr( $instance['label_password'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'label_password' ) ); ?>"><?php esc_html_e( 'Password Label:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'label_password' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'label_password' ) ); ?>" value="<?php echo esc_attr( $instance['label_password'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'label_log_in' ); ?>"><?php esc_html_e( 'Log In Label:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'label_log_in' ); ?>" name="<?php echo $this->get_field_name( 'label_log_in' ); ?>" value="<?php echo esc_attr( $instance['label_log_in'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'label_log_in' ) ); ?>"><?php esc_html_e( 'Log In Label:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'label_log_in' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'label_log_in' ) ); ?>" value="<?php echo esc_attr( $instance['label_log_in'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'label_remember' ); ?>"><?php esc_html_e( 'Remember Me Label:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'label_remember' ); ?>" name="<?php echo $this->get_field_name( 'label_remember' ); ?>" value="<?php echo esc_attr( $instance['label_remember'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'label_remember' ) ); ?>"><?php esc_html_e( 'Remember Me Label:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'label_remember' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'label_remember' ) ); ?>" value="<?php echo esc_attr( $instance['label_remember'] ); ?>" />
 		</p>
 
 		</div>
 		<div style="float: left; width: 31%; margin-right: 3.5%;">
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'value_username' ); ?>"><?php esc_html_e( 'Username Value:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'value_username' ); ?>" name="<?php echo $this->get_field_name( 'value_username' ); ?>" value="<?php echo esc_attr( $instance['value_username'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'value_username' ) ); ?>"><?php esc_html_e( 'Username Value:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'value_username' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'value_username' ) ); ?>" value="<?php echo esc_attr( $instance['value_username'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id_username' ); ?>"><?php esc_html_e( 'Username Field ID:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'id_username' ); ?>" name="<?php echo $this->get_field_name( 'id_username' ); ?>" value="<?php echo esc_attr( $instance['id_username'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'id_username' ) ); ?>"><?php esc_html_e( 'Username Field ID:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'id_username' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'id_username' ) ); ?>" value="<?php echo esc_attr( $instance['id_username'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id_remember' ); ?>"><?php esc_html_e( 'Remember Me Field ID:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'id_remember' ); ?>" name="<?php echo $this->get_field_name( 'id_remember' ); ?>" value="<?php echo esc_attr( $instance['id_remember'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'id_remember' ) ); ?>"><?php esc_html_e( 'Remember Me Field ID:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'id_remember' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'id_remember' ) ); ?>" value="<?php echo esc_attr( $instance['id_remember'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id_password' ); ?>"><?php esc_html_e( 'Password Field ID:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'id_password' ); ?>" name="<?php echo $this->get_field_name( 'id_password' ); ?>" value="<?php echo esc_attr( $instance['id_password'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'id_password' ) ); ?>"><?php esc_html_e( 'Password Field ID:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'id_password' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'id_password' ) ); ?>" value="<?php echo esc_attr( $instance['id_password'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id_submit' ); ?>"><?php esc_html_e( 'Submit Button ID:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'id_submit' ); ?>" name="<?php echo $this->get_field_name( 'id_submit' ); ?>" value="<?php echo esc_attr( $instance['id_submit'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'id_submit' ) ); ?>"><?php esc_html_e( 'Submit Button ID:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'id_submit' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'id_submit' ) ); ?>" value="<?php echo esc_attr( $instance['id_submit'] ); ?>" />
 		</p>
 
 		</div>
@@ -256,30 +256,30 @@ class Widget_Login extends \WP_Widget {
 
 		<p>
 			<label>
-				<input class="checkbox" type="checkbox" <?php checked( $instance['remember'] ); ?> name="<?php echo $this->get_field_name( 'remember' ); ?>" />
+				<input class="checkbox" type="checkbox" <?php checked( $instance['remember'] ); ?> name="<?php echo esc_attr( $this->get_field_name( 'remember' ) ); ?>" />
 				<?php esc_html_e( '"Remember me" checkbox?', 'members' ); ?>
 			</label>
 		</p>
 		<p>
 			<label>
-				<input class="checkbox" type="checkbox" <?php checked( $instance['value_remember'] ); ?> name="<?php echo $this->get_field_name( 'value_remember' ); ?>" />
+				<input class="checkbox" type="checkbox" <?php checked( $instance['value_remember'] ); ?> name="<?php echo esc_attr( $this->get_field_name( 'value_remember' ) ); ?>" />
 				<?php esc_html_e( 'Check "remember me"?', 'members' ); ?>
 			</label>
 		</p>
 		<p>
 			<label>
-				<input class="checkbox" type="checkbox" <?php checked( $instance['show_avatar'], true ); ?> name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" />
+				<input class="checkbox" type="checkbox" <?php checked( $instance['show_avatar'], true ); ?> name="<?php echo esc_attr( $this->get_field_name( 'show_avatar' ) ); ?>" />
 				<?php esc_html_e( 'Display avatar?', 'members' ); ?>
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'logged_out_text' ); ?>"><?php esc_html_e( 'Logged out text:', 'members' ); ?></label>
-			<textarea class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id( 'logged_out_text' ); ?>" name="<?php echo $this->get_field_name( 'logged_out_text' ); ?>" style="width:100%;"><?php echo esc_textarea( $instance['logged_out_text'] ); ?></textarea>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'logged_out_text' ) ); ?>"><?php esc_html_e( 'Logged out text:', 'members' ); ?></label>
+			<textarea class="widefat" rows="4" cols="20" id="<?php echo esc_attr( $this->get_field_id( 'logged_out_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'logged_out_text' ) ); ?>" style="width:100%;"><?php echo esc_textarea( $instance['logged_out_text'] ); ?></textarea>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'logged_in_text' ); ?>"><?php esc_html_e( 'Logged in text:', 'members' ); ?></label>
-			<textarea class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id( 'logged_in_text' ); ?>" name="<?php echo $this->get_field_name( 'logged_in_text' ); ?>" style="width:100%;"><?php echo esc_textarea( $instance['logged_in_text'] ); ?></textarea>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'logged_in_text' ) ); ?>"><?php esc_html_e( 'Logged in text:', 'members' ); ?></label>
+			<textarea class="widefat" rows="4" cols="20" id="<?php echo esc_attr( $this->get_field_id( 'logged_in_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'logged_in_text' ) ); ?>" style="width:100%;"><?php echo esc_textarea( $instance['logged_in_text'] ); ?></textarea>
 		</p>
 
 		</div>

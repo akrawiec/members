@@ -141,8 +141,8 @@ final class Role_Edit {
 			foreach ( $this->capabilities as $cap ) {
 
 				// Get the posted capability.
-				$grant_this_cap = in_array( $cap, $grant_caps );
-				$deny_this_cap  = in_array( $cap, $deny_caps  );
+				$grant_this_cap = in_array( $cap, $grant_caps, true );
+				$deny_this_cap  = in_array( $cap, $deny_caps, true );
 
 				// Does the role have the cap?
 				$is_granted_cap = $this->role->has_cap( $cap );
@@ -168,7 +168,7 @@ final class Role_Edit {
 				$_cap = members_sanitize_cap( $grant_new_cap );
 
 				// If not an existing cap, add it.
-				if ( 'do_not_allow' !== $_cap && ! in_array( $_cap, $this->capabilities ) ) {
+				if ( 'do_not_allow' !== $_cap && ! in_array( $_cap, $this->capabilities, true ) ) {
 					$this->role->add_cap( $_cap );
 
 					$push_caps[] = $_cap;
@@ -181,7 +181,7 @@ final class Role_Edit {
 				$_cap = members_sanitize_cap( $deny_new_cap );
 
 				// If not a granted cap and not an existing cap, add it.
-				if ( 'do_not_allow' !== $_cap && ! in_array( $_cap, $this->capabilities ) && ! in_array( $_cap, $grant_new_caps ) ) {
+				if ( 'do_not_allow' !== $_cap && ! in_array( $_cap, $this->capabilities, true ) && ! in_array( $_cap, $grant_new_caps, true ) ) {
 					$this->role->add_cap( $_cap, false );
 
 					$push_caps[] = $_cap;
@@ -310,7 +310,7 @@ final class Role_Edit {
 
 					<?php wp_nonce_field( 'edit_role', 'members_edit_role_nonce' ); ?>
 
-					<div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? 1 : 2; ?>">
+					<div id="post-body" class="metabox-holder columns-<?php echo 1 === get_current_screen()->get_columns() ? 1 : 2; ?>">
 
 						<div id="post-body-content">
 

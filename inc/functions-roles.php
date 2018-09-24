@@ -282,7 +282,7 @@ function members_translate_role_hook( $label, $role ) {
  */
 function members_role_has_users( $role ) {
 
-	return in_array( $role, members_get_active_roles() );
+	return in_array( $role, members_get_active_roles(), true );
 }
 
 /**
@@ -363,7 +363,7 @@ function members_get_role_denied_cap_count( $role ) {
  */
 function members_is_role_editable( $role ) {
 
-	return in_array( $role, members_get_editable_roles() );
+	return in_array( $role, members_get_editable_roles(), true );
 }
 
 /**
@@ -376,7 +376,7 @@ function members_is_role_editable( $role ) {
  */
 function members_is_wordpress_role( $role ) {
 
-	return in_array( $role, array( 'administrator', 'editor', 'author', 'contributor', 'subscriber' ) );
+	return in_array( $role, array( 'administrator', 'editor', 'author', 'contributor', 'subscriber' ), true );
 }
 
 /* ====== URLs ====== */
@@ -403,7 +403,7 @@ function members_get_new_role_url() {
  */
 function members_get_clone_role_url( $role ) {
 
-	return add_query_arg( 'clone', $role, members_get_new_role_url() );
+	return add_query_arg( 'clone', rawurlencode( $role ), esc_url( members_get_new_role_url() ) );
 }
 
 /**
@@ -428,7 +428,7 @@ function members_get_edit_roles_url() {
  */
 function members_get_role_view_url( $view ) {
 
-	return add_query_arg( 'view', $view, members_get_edit_roles_url() );
+	return add_query_arg( 'view', rawurlencode( $view ), esc_url(  members_get_edit_roles_url() ) );
 }
 
 /**
@@ -441,7 +441,7 @@ function members_get_role_view_url( $view ) {
  */
 function members_get_edit_role_url( $role ) {
 
-	return add_query_arg( array( 'action' => 'edit', 'role' => $role ), members_get_edit_roles_url() );
+	return add_query_arg( array_map( 'rawurlencode', array( 'action' => 'edit', 'role' => $role ) ), esc_url( members_get_edit_roles_url() ) );
 }
 
 /**
@@ -454,7 +454,7 @@ function members_get_edit_role_url( $role ) {
  */
 function members_get_delete_role_url( $role ) {
 
-	$url = add_query_arg( array( 'action' => 'delete', 'role' => $role ), members_get_edit_roles_url() );
+	$url = add_query_arg( array_map( 'rawurlencode', array( 'action' => 'delete', 'role' => $role ) ), esc_url( members_get_edit_roles_url() ) );
 
 	return wp_nonce_url( $url, 'delete_role', 'members_delete_role_nonce' );
 }
@@ -469,5 +469,5 @@ function members_get_delete_role_url( $role ) {
  */
 function members_get_role_users_url( $role ) {
 
-	return admin_url( add_query_arg( 'role', $role, 'users.php' ) );
+	return admin_url( add_query_arg( 'role', rawurlencode( $role ), 'users.php' ) );
 }

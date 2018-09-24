@@ -205,7 +205,7 @@ class Role_List_Table extends \WP_List_Table {
 	 */
 	protected function column_cb( $role ) {
 
-		if ( $role == get_option( 'default_role' ) || in_array( $role, $this->current_user->roles ) || ! members_is_role_editable( $role ) )
+		if ( $role === get_option( 'default_role' ) || in_array( $role, $this->current_user->roles ) || ! members_is_role_editable( $role ) )
 			$out = '';
 
 		else
@@ -228,7 +228,7 @@ class Role_List_Table extends \WP_List_Table {
 		$role_states = '';
 
 		// If the role is the default role.
-		if ( $role == get_option( 'default_role' ) )
+		if ( $role === get_option( 'default_role' ) )
 			$states['default'] = esc_html__( 'Default Role', 'members' );
 
 		// If the current user has this role.
@@ -242,7 +242,7 @@ class Role_List_Table extends \WP_List_Table {
 		if ( ! empty( $states ) ) {
 
 			foreach ( $states as $state => $label )
-				$states[ $state ] = sprintf( '<span class="role-state">%s</span>', $label );
+				$states[ $state ] = sprintf( '<span class="role-state">%s</span>', esc_url( $label ) );
 
 			$role_states = ' &ndash; ' . join( ', ', $states );
 		}
