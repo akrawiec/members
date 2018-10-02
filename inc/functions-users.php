@@ -38,7 +38,7 @@ function members_user_has_cap_filter( $allcaps, $caps, $args, $user ) {
 		return $allcaps;
 
 	// Get the denied caps.
-	$denied_caps = array_keys( $allcaps, false );
+	$denied_caps = array_keys( $allcaps, false, true );
 
 	// Loop through the user's roles and find any denied caps.
 	foreach ( (array) $user->roles as $role ) {
@@ -48,7 +48,7 @@ function members_user_has_cap_filter( $allcaps, $caps, $args, $user ) {
 
 		// If we have an object, merge it's denied caps.
 		if ( ! is_null( $role_obj ) )
-			$denied_caps = array_merge( $denied_caps, array_keys( $role_obj->capabilities, false ) );
+			$denied_caps = array_merge( $denied_caps, array_keys( $role_obj->capabilities, false, true ) );
 	}
 
 	// If there are any denied caps, make sure they take precedence.
