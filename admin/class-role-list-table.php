@@ -92,8 +92,8 @@ class Role_List_Table extends \WP_List_Table {
 		$this->allowed_role_views = array_keys( $this->get_views() );
 
 		// Get the current view.
-		if ( isset( $_GET['view'] ) && in_array( $_GET['view'], $this->allowed_role_views ) )
-			$this->role_view = $_GET['view'];
+		if ( isset( $_GET['view'] ) && ( true === in_array( $_GET['view'], $this->allowed_role_views ) ) )
+			$this->role_view = sanitize_text_field( $_GET['view'] );
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Role_List_Table extends \WP_List_Table {
 	 */
 	protected function column_cb( $role ) {
 
-		if ( $role === get_option( 'default_role' ) || in_array( $role, $this->current_user->roles ) || ! members_is_role_editable( $role ) )
+		if ( $role === get_option( 'default_role' ) || ( true === in_array( $role, $this->current_user->roles ) ) || ! members_is_role_editable( $role ) )
 			$out = '';
 
 		else
