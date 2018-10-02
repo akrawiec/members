@@ -139,8 +139,8 @@ class Role {
 			$this->caps = array_map( 'members_validate_boolean', $this->caps );
 
 			// Get granted and denied caps.
-			$this->granted_caps = array_keys( $this->caps, true  );
-			$this->denied_caps  = array_keys( $this->caps, false );
+			$this->granted_caps = array_keys( $this->caps, true, true );
+			$this->denied_caps  = array_keys( $this->caps, false, true );
 
 			// Remove user levels from granted/denied caps.
 			$this->granted_caps = members_remove_old_levels( $this->granted_caps );

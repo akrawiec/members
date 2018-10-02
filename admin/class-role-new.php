@@ -166,10 +166,10 @@ final class Role_New {
 
 				foreach ( $_m_caps as $cap ) {
 
-					if ( in_array( $cap, $grant_caps ) )
+					if ( true === in_array( $cap, $grant_caps ) )
 						$new_caps[ $cap ] = true;
 
-					else if ( in_array( $cap, $deny_caps ) )
+					else if ( true === in_array( $cap, $deny_caps ) )
 						$new_caps[ $cap ] = false;
 				}
 			}
@@ -181,7 +181,7 @@ final class Role_New {
 
 				$_cap = members_sanitize_cap( $grant_new_cap );
 
-				if ( ! in_array( $_cap, $_m_caps ) )
+				if ( true !== in_array( $_cap, $_m_caps ) )
 					$new_caps[ $_cap ] = true;
 			}
 
@@ -189,7 +189,7 @@ final class Role_New {
 
 				$_cap = members_sanitize_cap( $deny_new_cap );
 
-				if ( ! in_array( $_cap, $_m_caps ) )
+				if ( true !== in_array( $_cap, $_m_caps ) )
 					$new_caps[ $_cap ] = false;
 			}
 
@@ -317,7 +317,7 @@ final class Role_New {
 
 					<?php wp_nonce_field( 'new_role', 'members_new_role_nonce' ); ?>
 
-					<div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? 1 : 2; ?>">
+					<div id="post-body" class="metabox-holder columns-<?php echo 1 === get_current_screen()->get_columns() ? 1 : 2; ?>">
 
 						<div id="post-body-content">
 

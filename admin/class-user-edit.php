@@ -153,7 +153,7 @@ final class User_Edit {
 			foreach ( $new_roles as $new_role ) {
 
 				// If the user doesn't already have the role, add it.
-				if ( members_is_role_editable( $new_role ) && ! in_array( $new_role, (array) $old_user_data->roles ) )
+				if ( members_is_role_editable( $new_role ) && ( true !== in_array( $new_role, (array) $old_user_data->roles ) ) )
 					$old_user_data->add_role( $new_role );
 			}
 
@@ -161,7 +161,7 @@ final class User_Edit {
 			foreach ( $old_roles as $old_role ) {
 
 				// If the role is editable and not in the new roles array, remove it.
-				if ( members_is_role_editable( $old_role ) && ! in_array( $old_role, $new_roles ) )
+				if ( members_is_role_editable( $old_role ) && ( true !== in_array( $old_role, $new_roles ) ) )
 					$old_user_data->remove_role( $old_role );
 			}
 
