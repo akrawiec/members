@@ -49,7 +49,7 @@ function members_register_default_cap_groups() {
 	foreach ( get_post_types( array(), 'objects' ) as $type ) {
 
 		// Skip revisions and nave menu items.
-		if ( in_array( $type->name, array( 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset' ) ) )
+		if ( true === in_array( $type->name, array( 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset' ) ) )
 			continue;
 
 		// Get the caps for the post type.
@@ -234,7 +234,7 @@ function members_get_post_type_group_caps( $post_type = 'post' ) {
 	$caps = array_values( $caps );
 
 	// If this is not a core post/page post type.
-	if ( ! in_array( $post_type, array( 'post', 'page', true ) ) ) {
+	if ( true !== in_array( $post_type, array( 'post', 'page', true ) ) ) {
 
 		// Get the post and page caps.
 		$post_caps = array_values( (array) get_post_type_object( 'post' )->cap );
