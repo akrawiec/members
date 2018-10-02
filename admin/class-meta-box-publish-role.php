@@ -98,19 +98,19 @@ final class Meta_Box_Publish_Role {
 				<div class="misc-pub-section misc-pub-section-users">
 					<i class="dashicons dashicons-admin-users"></i>
 					<?php esc_html_e( 'Users:', 'members' ); ?>
-					<strong class="user-count"><?php echo number_format_i18n( $user_count ); ?></strong>
+					<strong class="user-count"><?php echo esc_html( number_format_i18n( $user_count ) ); ?></strong>
 				</div>
 
 				<div class="misc-pub-section misc-pub-section-granted">
 					<i class="dashicons dashicons-yes"></i>
 					<?php esc_html_e( 'Granted:', 'members' ); ?>
-					<strong class="granted-count"><?php echo number_format_i18n( $grant_count ); ?></strong>
+					<strong class="granted-count"><?php echo esc_html( number_format_i18n( $grant_count ) ); ?></strong>
 				</div>
 
 				<div class="misc-pub-section misc-pub-section-denied">
 					<i class="dashicons dashicons-no"></i>
 					<?php esc_html_e( 'Denied:', 'members' ); ?>
-					<strong class="denied-count"><?php echo number_format_i18n( $deny_count ); ?></strong>
+					<strong class="denied-count"><?php echo esc_html( number_format_i18n( $deny_count ) ); ?></strong>
 				</div>
 
 			</div><!-- #misc-publishing-actions -->

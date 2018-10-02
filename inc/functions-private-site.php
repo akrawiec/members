@@ -193,7 +193,7 @@ function members_ms_private_blog_die() {
 	if ( empty( $blogs ) )
 		wp_die( sprintf( $message, $blogname ), 403 );
 
-	$output = '<p>' . sprintf( $message, $blogname ) . '</p>';
+	$output = '<p>' . sprintf( $message, esc_html ( $blogname ) ) . '</p>';
 
 	$output .= sprintf( '<p>%s</p>', __( 'If you reached this page by accident and meant to visit one of your own sites, try one of the following links.', 'members' ) );
 

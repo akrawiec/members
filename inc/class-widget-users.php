@@ -102,10 +102,10 @@ class Widget_Users extends \WP_Widget {
 
 		// If a title was input by the user, display it.
 		if ( $instance['title'] )
-			echo $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'];
+			echo esc_html( $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'] );
 
 		// Get users.
-		$users = get_users( $args );
+		$users = wp_cache_set( get_users( $args ) );
 
 		// If users were found.
 		if ( ! empty( $users ) ) {
@@ -205,28 +205,28 @@ class Widget_Users extends \WP_Widget {
 		<div style="float: left;width: 48%;">
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'members' ); ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'members' ); ?></label>
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><?php esc_html_e( 'Order By:', 'members' ); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"><?php esc_html_e( 'Order By:', 'members' ); ?></label>
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'orderby' ) ); ?>">
 				<?php foreach ( $orderby as $option_value => $option_label ) : ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
 				<?php endforeach; ?>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php esc_html_e( 'Order:', 'members' ); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>"><?php esc_html_e( 'Order:', 'members' ); ?></label>
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'order' ) ); ?>">
 				<?php foreach ( $order as $option_value => $option_label ) : ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
 				<?php endforeach; ?>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'role' ); ?>"><?php esc_html_e( 'Role:', 'members' ); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'role' ); ?>" name="<?php echo $this->get_field_name( 'role' ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'role' ) ); ?>"><?php esc_html_e( 'Role:', 'members' ); ?></label>
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'role' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'role' ) ); ?>">
 				<option value="" <?php selected( $instance['role'], '' ); ?>></option>
 				<?php foreach ( $roles as $name => $role ) : ?>
 					<option value="<?php echo esc_attr( $name ); ?>" <?php selected( $instance['role'], $name ); ?>><?php echo esc_html( $role->get( 'label' ) ); ?></option>
@@ -234,40 +234,40 @@ class Widget_Users extends \WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php esc_html_e( 'Limit:', 'members' ); ?></label>
-			<input type="number" min="0" class="widefat code" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" value="<?php echo esc_attr( $instance['number'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"><?php esc_html_e( 'Limit:', 'members' ); ?></label>
+			<input type="number" min="0" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" value="<?php echo esc_attr( $instance['number'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'offset' ); ?>"><?php esc_html_e( 'Offset:', 'members' ); ?></label>
-			<input type="number" min="1" class="widefat code" id="<?php echo $this->get_field_id( 'offset' ); ?>" name="<?php echo $this->get_field_name( 'offset' ); ?>" value="<?php echo esc_attr( $instance['offset'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'offset' ); ?>"><?php esc_html_e( 'Offset:', 'members' ); ?></label>
+			<input type="number" min="1" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'offset' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'offset' ) ); ?>" value="<?php echo esc_attr( $instance['offset'] ); ?>" />
 		</p>
 
 		</div>
 		<div style="float: right; width: 48%;">
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'include' ); ?>"><?php esc_html_e( 'Include:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'include' ); ?>" name="<?php echo $this->get_field_name( 'include' ); ?>" value="<?php echo esc_attr( $instance['include'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'include' ) ); ?>"><?php esc_html_e( 'Include:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'include' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'include' ) ); ?>" value="<?php echo esc_attr( $instance['include'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'exclude' ); ?>"><?php esc_html_e( 'Exclude:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'exclude' ); ?>" name="<?php echo $this->get_field_name( 'exclude' ); ?>" value="<?php echo esc_attr( $instance['exclude'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>"><?php esc_html_e( 'Exclude:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'exclude' )); ?>" name="<?php echo esc_attr( $this->get_field_name( 'exclude' )); ?>" value="<?php echo esc_attr( $instance['exclude'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'search' ); ?>"><?php esc_html_e( 'Search:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'search' ); ?>" name="<?php echo $this->get_field_name( 'search' ); ?>" value="<?php echo esc_attr( $instance['search'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'search' ) ); ?>"><?php esc_html_e( 'Search:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'search' )); ?>" name="<?php echo esc_attr( $this->get_field_name( 'search' ) ); ?>" value="<?php echo esc_attr( $instance['search'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'meta_key' ); ?>"><?php esc_html_e( 'Meta Key:', 'members' ); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'meta_key' ); ?>" name="<?php echo $this->get_field_name( 'meta_key' ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'meta_key' ) ); ?>"><?php esc_html_e( 'Meta Key:', 'members' ); ?></label>
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'meta_key' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'meta_key' ) ); ?>">
 				<?php foreach ( $meta_key as $meta ) { ?>
 					<option value="<?php echo esc_attr( $meta ); ?>" <?php selected( $instance['meta_key'], $meta ); ?>><?php echo esc_html( $meta ); ?></option>
 				<?php } ?>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'meta_value' ); ?>"><?php esc_html_e( 'Meta Value:', 'members' ); ?></label>
-			<input type="text" class="widefat code" id="<?php echo $this->get_field_id( 'meta_value' ); ?>" name="<?php echo $this->get_field_name( 'meta_value' ); ?>" value="<?php echo esc_attr( $instance['meta_value'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'meta_value' ) ); ?>"><?php esc_html_e( 'Meta Value:', 'members' ); ?></label>
+			<input type="text" class="widefat code" id="<?php echo esc_attr( $this->get_field_id( 'meta_value' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'meta_value' ) ); ?>" value="<?php echo esc_attr( $instance['meta_value'] ); ?>" />
 		</p>
 
 		</div>

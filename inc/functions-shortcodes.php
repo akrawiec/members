@@ -168,10 +168,10 @@ function members_access_check_shortcode( $attr, $content = null ) {
 		$ids = array_map( 'trim', explode( ',', $attr['user_id'] ) );
 
 		if ( '!' === $operator ) {
-			return in_array( $user_id, $ids ) ? '' : do_shortcode( $content );
+			return in_array( $user_id, $ids, true ) ? '' : do_shortcode( $content );
 		}
 
-		return in_array( $user_id, $ids ) ? do_shortcode( $content ) : '';
+		return in_array( $user_id, $ids, true ) ? do_shortcode( $content ) : '';
 	}
 
 	// If the current user has one of the user names.
@@ -181,10 +181,10 @@ function members_access_check_shortcode( $attr, $content = null ) {
 		$names = array_map( 'trim', explode( ',', $attr['user_name'] ) );
 
 		if ( '!' === $operator ) {
-			return in_array( $user_name, $names ) ? '' : do_shortcode( $content );
+			return in_array( $user_name, $names, true ) ? '' : do_shortcode( $content );
 		}
 
-		return in_array( $user_name, $names ) ? do_shortcode( $content ) : '';
+		return in_array( $user_name, $names, true ) ? do_shortcode( $content ) : '';
 	}
 
 	// If the current user has one of the user emails.
@@ -194,10 +194,10 @@ function members_access_check_shortcode( $attr, $content = null ) {
 		$emails = array_map( 'trim', explode( ',', $attr['user_email'] ) );
 
 		if ( '!' === $operator ) {
-			return in_array( $user_email, $emails ) ? '' : do_shortcode( $content );
+			return in_array( $user_email, $emails, true ) ? '' : do_shortcode( $content );
 		}
 
-		return in_array( $user_email, $emails ) ? do_shortcode( $content ) : '';
+		return in_array( $user_email, $emails, true ) ? do_shortcode( $content ) : '';
 	}
 
 	// Return an empty string if we've made it to this point.

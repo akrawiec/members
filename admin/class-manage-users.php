@@ -123,21 +123,21 @@ final class Manage_Users {
 	public function role_bulk_add() {
 
 		// Bail if we ain't got users.
-		if ( empty( $_REQUEST['users'] ) )
+		if ( empty( $_POST['users'] ) )
 			return;
 
 		// Figure out if we have a role selected.
-		if ( ! empty( $_REQUEST['members-add-role-top'] ) && ! empty( $_REQUEST['members-add-role-submit-top'] ) )
-			$role = members_sanitize_role( $_REQUEST['members-add-role-top'] );
+		if ( ! empty( $_POST['members-add-role-top'] ) && ! empty( $_POST['members-add-role-submit-top'] ) )
+			$role = members_sanitize_role( $_POST['members-add-role-top'] );
 
-		elseif ( ! empty( $_REQUEST['members-add-role-bottom'] ) && ! empty( $_REQUEST['members-add-role-submit-bottom'] ) )
-			$role = members_sanitize_role( $_REQUEST['members-add-role-bottom'] );
+		elseif ( ! empty( $_POST['members-add-role-bottom'] ) && ! empty( $_POST['members-add-role-submit-bottom'] ) )
+			$role = members_sanitize_role( $_POST['members-add-role-bottom'] );
 
 		// Get only editable roles.
 		$editable_roles = members_get_editable_roles();
 
 		// If we don't have a role or the role is not editable, bail.
-		if ( empty( $role ) || ! in_array( $role, $editable_roles ) )
+		if ( empty( $role ) || ! in_array( $role, $editable_roles, true ) )
 			return;
 
 		// Validate our nonce.
@@ -148,7 +148,7 @@ final class Manage_Users {
 			return;
 
 		// Loop through the users and add the role if possible.
-		foreach ( (array) $_REQUEST['users'] as $user_id ) {
+		foreach ( (array) $_POST['users'] as $user_id ) {
 
 			$user_id = absint( $user_id );
 
@@ -178,7 +178,8 @@ final class Manage_Users {
 		}
 
 		// Redirect to the users screen.
-		wp_redirect( add_query_arg( 'update', 'members-role-added', 'users.php' ) );
+		wp_safe_redirect( add_query_arg( 'update', 'members-role-added', 'users.php' ) );
+		exit();
 	}
 
 	/**
@@ -191,15 +192,15 @@ final class Manage_Users {
 	public function role_bulk_remove() {
 
 		// Bail if we ain't got users.
-		if ( empty( $_REQUEST['users'] ) )
+		if ( empty( $_POST['users'] ) )
 			return;
 
 		// Figure out if we have a role selected.
-		if ( ! empty( $_REQUEST['members-remove-role-top'] ) && ! empty( $_REQUEST['members-remove-role-submit-top'] ) )
-			$role = members_sanitize_role( $_REQUEST['members-remove-role-top'] );
+		if ( ! empty( $_POST['members-remove-role-top'] ) && ! empty( $_POST['members-remove-role-submit-top'] ) )
+			$role = members_sanitize_role( $_POST['members-remove-role-top'] );
 
-		elseif ( ! empty( $_REQUEST['members-remove-role-bottom'] ) && ! empty( $_REQUEST['members-remove-role-submit-bottom'] ) )
-			$role = members_sanitize_role( $_REQUEST['members-remove-role-bottom'] );
+		elseif ( ! empty( $_POST['members-remove-role-bottom'] ) && ! empty( $_POST['members-remove-role-submit-bottom'] ) )
+			$role = members_sanitize_role( $_POST['members-remove-role-bottom'] );
 
 		// Get only editable roles.
 		$editable_roles = members_get_editable_roles();
@@ -223,7 +224,7 @@ final class Manage_Users {
 		$update = 'members-role-removed';
 
 		// Loop through the users and remove the role if possible.
-		foreach ( (array) $_REQUEST['users'] as $user_id ) {
+		foreach ( (array) $_POST['users'] as $user_id ) {
 
 			$user_id = absint( $user_id );
 
@@ -244,8 +245,8 @@ final class Manage_Users {
 			if ( ! current_user_can( 'promote_user', $user_id ) )
 				continue;
 
-			$is_current_user    = $user_id == $current_user->ID;
-			$role_can_promote   = in_array( 'promote_users', $m_role->granted_caps );
+			$is_current_user    = $user_id === $current_user->ID;
+			$role_can_promote   = in_array( 'promote_users', $m_role->granted_caps, true );
 			$can_manage_network = is_multisite() && current_user_can( 'manage_network_users' );
 
 			// If the removed role has the `promote_users` cap and user is removing it from themselves.
@@ -259,7 +260,7 @@ final class Manage_Users {
 					// If the current user has another role that can promote users, it's
 					// safe to remove the role.  Else, the current user needs to keep
 					// the role.
-					if ( $role !== $_r && in_array( 'promote_users', members_get_role( $_r )->granted_caps ) ) {
+					if ( $role !== $_r && in_array( 'promote_users', members_get_role( $_r )->granted_caps, true ) ) {
 
 						$can_remove = true;
 						break;
@@ -276,12 +277,13 @@ final class Manage_Users {
 			$user = new \WP_User( $user_id );
 
 			// If the user has the role, remove it.
-			if ( in_array( $role, $user->roles ) )
+			if ( in_array( $role, $user->roles, true ) )
 				$user->remove_role( $role );
 		}
 
 		// Redirect to the users screen.
-		wp_redirect( add_query_arg( 'update', $update, 'users.php' ) );
+		wp_safe_redirect( add_query_arg( 'update', $update, 'users.php' ) );
+		exit();
 	}
 
 	/**
@@ -299,7 +301,7 @@ final class Manage_Users {
 			<?php foreach ( $this->notices as $notice ) : ?>
 
 				<div class="notice notice-<?php echo esc_attr( $notice['type'] ); ?> is-dismissible">
-					<?php echo wpautop( '<strong>' . $notice['message'] . '</strong>' ); ?>
+					<?php echo wpautop( '<strong>' . esc_html( $notice['message'] ) . '</strong>' ); ?>
 				</div>
 
 			<?php endforeach;

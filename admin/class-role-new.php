@@ -218,7 +218,7 @@ final class Role_New {
 
 				// If the current user can edit roles, redirect to edit role screen.
 				if ( current_user_can( 'edit_roles' ) ) {
-					wp_redirect( esc_url_raw( add_query_arg( 'message', 'role_added', members_get_edit_role_url( $this->role ) ) ) );
+					wp_safe_redirect( esc_url_raw( add_query_arg( 'message', 'role_added', members_get_edit_role_url( $this->role ) ) ) );
  					exit;
 				}
 
@@ -331,7 +331,7 @@ final class Role_New {
 								<div class="inside">
 									<div id="edit-slug-box">
 										<strong><?php esc_html_e( 'Role:', 'members' ); ?></strong> <span class="role-slug"><?php echo ! $this->role && $this->clone_role ? esc_attr( "{$this->clone_role}_clone" ) : esc_attr( $this->role ); ?></span> <!-- edit box -->
-										<input type="text" name="role" value="<?php echo members_sanitize_role( $this->role ); ?>" />
+										<input type="text" name="role" value="<?php echo esc_attr( members_sanitize_role( $this->role ) ); ?>" />
 										<button type="button" class="role-edit-button button button-small closed"><?php esc_html_e( 'Edit', 'members' ); ?></button>
 									</div>
 								</div><!-- .inside -->

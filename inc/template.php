@@ -67,7 +67,7 @@ function members_can_user_view_post( $user_id, $post_id = '' ) {
 			}
 
 			// If the post author, the current user can edit the post, or the current user can 'restrict_content', return true.
-			elseif ( $post->post_author == $user_id || user_can( $user_id, 'restrict_content' ) || user_can( $user_id, $post_type->cap->edit_post, $post_id ) ) {
+			elseif ( $post->post_author === $user_id || user_can( $user_id, 'restrict_content' ) || user_can( $user_id, $post_type->cap->edit_post, $post_id ) ) {
 				$can_view = true;
 			}
 
