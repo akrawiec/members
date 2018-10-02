@@ -148,7 +148,7 @@ function members_register_default_caps() {
 
 	foreach ( $tax_caps as $tax_cap => $args ) {
 
-		if ( in_array( $tax_cap, $role_caps ) )
+		if ( true === in_array( $tax_cap, $role_caps ) )
 			members_register_cap( $tax_cap, $args );
 	}
 }
@@ -258,7 +258,7 @@ function members_is_cap_editable( $cap ) {
 
 	$uneditable = array_keys( members_get_uneditable_roles() );
 
-	return ! in_array( $cap, members_get_wp_capabilities() ) && ! array_intersect( $uneditable, members_get_cap_roles( $cap ) );
+	return ! ( true === in_array( $cap, members_get_wp_capabilities() ) ) && ! array_intersect( $uneditable, members_get_cap_roles( $cap ) );
 }
 
 /**
@@ -355,7 +355,7 @@ function members_check_for_cap( $cap = '' ) {
 		return false;
 
 	// Check if the cap is assigned to any role.
-	return in_array( $cap, members_get_role_capabilities() );
+	return ( true === in_array( $cap, members_get_role_capabilities() ) );
 }
 
 /**
