@@ -288,7 +288,7 @@ final class Members_Plugin {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 
 			// Add an error message and die.
-			wp_die( $this->get_min_php_message() );
+			wp_die( esc_html( $this->get_min_php_message() ) );
 		}
 
 		// Get the administrator role.

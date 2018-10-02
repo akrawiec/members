@@ -191,11 +191,11 @@ function members_ms_private_blog_die() {
 	$message = __( 'You do not currently have access to the "%s" site. If you believe you should have access, please contact your network administrator.', 'members' );
 
 	if ( empty( $blogs ) )
-		wp_die( sprintf( $message, $blogname ), 403 );
+		wp_die( wp_kses_post( sprintf( $message, $blogname ) ), 403 );
 
 	$output = '<p>' . sprintf( $message, esc_html ( $blogname ) ) . '</p>';
 
-	$output .= sprintf( '<p>%s</p>', __( 'If you reached this page by accident and meant to visit one of your own sites, try one of the following links.', 'members' ) );
+	$output .= wp_kses_post( sprintf( '<p>%s</p>', __( 'If you reached this page by accident and meant to visit one of your own sites, try one of the following links.', 'members' ) ) );
 
 	$output .= '<ul>';
 
