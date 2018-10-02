@@ -120,7 +120,7 @@ class Widget_Login extends \WP_Widget {
 
 		// If a title was input by the user, display it.
 		if ( $instance['title'] )
-			echo esc_html( $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'] );
+			echo wp_kses_post( $sidebar['before_title'] . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $sidebar['after_title'] );
 
 		// If the current user is logged in.
 		if ( is_user_logged_in() ) {
@@ -164,16 +164,16 @@ class Widget_Login extends \WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 
-		$instance['title']          = strip_tags( $new_instance['title'] );
-		$instance['label_username'] = strip_tags( $new_instance['label_username'] );
-		$instance['label_password'] = strip_tags( $new_instance['label_password'] );
-		$instance['label_remember'] = strip_tags( $new_instance['label_remember'] );
-		$instance['label_log_in']   = strip_tags( $new_instance['label_log_in'] );
-		$instance['id_username']    = strip_tags( $new_instance['id_username'] );
-		$instance['id_password']    = strip_tags( $new_instance['id_password'] );
-		$instance['id_remember']    = strip_tags( $new_instance['id_remember'] );
-		$instance['id_submit']      = strip_tags( $new_instance['id_submit'] );
-		$instance['value_username'] = strip_tags( $new_instance['value_username'] );
+		$instance['title']          = wp_strip_tags( $new_instance['title'] );
+		$instance['label_username'] = wp_strip_tags( $new_instance['label_username'] );
+		$instance['label_password'] = wp_strip_tags( $new_instance['label_password'] );
+		$instance['label_remember'] = wp_strip_tags( $new_instance['label_remember'] );
+		$instance['label_log_in']   = wp_strip_tags( $new_instance['label_log_in'] );
+		$instance['id_username']    = wp_strip_tags( $new_instance['id_username'] );
+		$instance['id_password']    = wp_strip_tags( $new_instance['id_password'] );
+		$instance['id_remember']    = wp_strip_tags( $new_instance['id_remember'] );
+		$instance['id_submit']      = wp_strip_tags( $new_instance['id_submit'] );
+		$instance['value_username'] = wp_strip_tags( $new_instance['value_username'] );
 
 		$instance['remember']       = isset( $new_instance['remember'] )       ? 1 : 0;
 		$instance['value_remember'] = isset( $new_instance['value_remember'] ) ? 1 : 0;
