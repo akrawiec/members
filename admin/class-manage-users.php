@@ -173,7 +173,7 @@ final class Manage_Users {
 			$user = new \WP_User( $user_id );
 
 			// If the user doesn't have the role, add it.
-			if ( ! in_array( $role, $user->roles ) )
+			if ( true !== in_array( $role, $user->roles ) )
 				$user->add_role( $role );
 		}
 
@@ -206,7 +206,7 @@ final class Manage_Users {
 		$editable_roles = members_get_editable_roles();
 
 		// If we don't have a role or the role is not editable, bail.
-		if ( empty( $role ) || ! in_array( $role, $editable_roles ) )
+		if ( empty( $role ) || ( true !== in_array( $role, $editable_roles ) ) )
 			return;
 
 		// Validate our nonce.
