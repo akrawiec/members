@@ -78,7 +78,7 @@ function members_user_has_role( $user_id, $roles ) {
 
 	foreach ( (array) $roles as $role ) {
 
-		if ( in_array( $role, (array) $user->roles ) )
+		if ( true === in_array( $role, (array) $user->roles ) )
 			return true;
 	}
 
