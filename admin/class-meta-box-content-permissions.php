@@ -266,7 +266,7 @@ final class Meta_Box_Content_Permissions {
 		$current_roles = members_get_post_roles( $post_id );
 
 		// Get the new roles.
-		$new_roles = isset( $_POST['members_access_role'] ) ? $_POST['members_access_role'] : '';
+		$new_roles = isset( $_POST['members_access_role'] ) ? wp_kses_post( $_POST['members_access_role'] ) : '';
 
 		// If we have an array of new roles, set the roles.
 		if ( is_array( $new_roles ) )
